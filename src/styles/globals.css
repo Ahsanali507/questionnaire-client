@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (max-width: 768px) {
+    .email-left-container {
+      flex-direction: column;
+    }
+
+    .email-left-sub{
+        opacity: 0.2;
+        width: 100%;
+    }
+
+    .email-right-sub{
+        margin-top: -250px;
+        width: 100%;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        padding-bottom: 10px;
+    }
+
+    .heading{
+        font-size: 2rem;
+    }
+
+    .question2-main-container{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .thankyou-main{
+        flex-direction: column;
+    }
+
+    .thankyou-left{
+        opacity: 0.3;
+        width: 100%;
+    }
+
+    .thankyou-right{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 104px;
+        margin-top: -200px;
+        width: 100%;
+    }
+  }

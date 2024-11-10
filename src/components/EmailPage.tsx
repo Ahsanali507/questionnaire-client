@@ -9,13 +9,11 @@ import ArrowSvg from '../assets/images/arrow.svg'
 import ShoesSvg from '../assets/images/shows.svg'
 import ShadowSvg from '../assets/images/shadow.svg'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/router';
 
 export default function EmailPage() {
   const [emailInput, setEmailInput] = useState('')
   const [showError, setShowError] = useState(false)
   const dispatch = useDispatch()
-  const router = useRouter()
 
   const handleSubmit = async () => {
     try {
@@ -55,7 +53,6 @@ export default function EmailPage() {
       } else {
         window.location.href = '/question1'
       }
-      router.push('/question1')
     } catch (error) {
       console.error('Error checking status:', error)
     }

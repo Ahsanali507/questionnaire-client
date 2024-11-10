@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setStep, setResponse } from '../redux/reducers/questionnaireReducer'
 import { useRouter } from 'next/router'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { RootState } from '../types/types'
 
 export default function QuestionPage2() {
   const dispatch = useDispatch()
   const router = useRouter()
-  const email = useSelector((state: any) => state.questionnaire.email)
-  const existingResponse = useSelector((state: any) => state.questionnaire.responses.step2)
+  const email = useSelector((state: RootState) => state.questionnaire.email)
+  const existingResponse = useSelector((state: RootState) => state.questionnaire.responses.step2)
 
   const [comfortScore, setComfortScore] = useState<number>(existingResponse?.Comfort || 0)
   const [looksScore, setLooksScore] = useState<number>(existingResponse?.Looks || 0)

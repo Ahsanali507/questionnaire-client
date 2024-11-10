@@ -1,19 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// Define the initial state of the questionnaire
-interface QuestionnaireState {
-  email: string;
-  status: 'new' | 'in-progress' | 'completed';
-  step: number;
-  responses: {
-    step1: string | null;
-    step2: {
-      Comfort: number | null;
-      Looks: number | null;
-      Price: number | null;
-    } | null;
-  };
-}
+import { QuestionnaireState } from '../../types/types';
 
 const initialState: QuestionnaireState = {
   email: '',
@@ -29,34 +15,46 @@ const initialState: QuestionnaireState = {
   },
 };
 
-// Create the questionnaire slice with actions and reducers
 const questionnaireSlice = createSlice({
   name: 'questionnaire',
   initialState,
   reducers: {
-    setEmail(state, action: PayloadAction<string>) {
+    setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    setStatus(state, action: PayloadAction<'new' | 'in-progress' | 'completed'>) {
+    setStatus: (state, action: PayloadAction<'new' | 'in-progress' | 'completed'>) => {
       state.status = action.payload;
     },
-    setStep(state, action: PayloadAction<number>) {
+    setStep: (state, action: PayloadAction<number>) => {
       state.step = action.payload;
     },
-    setResponse(
+    setResponse: (
       state,
-      action: PayloadAction<{ step: string; response: any }>
-    ) {
+      action: PayloadAction<{ 
+        step: 'step1' | 'step2'; 
+        response: string | { Comfort: number; Looks: number; Price: number } 
+      }>
+    ) => {
       const { step, response } = action.payload;
       if (step === 'step1') {
-        state.responses.step1 = response;
+        state.responses.step1 = response as string;
       } else if (step === 'step2') {
-        state.responses.step2 = response;
+        state.responses.step2 = response as { Comfort: number; Looks: number; Price: number };
       }
+    },
+    resetResponses: (state) => {
+      state.responses = {
+        step1: null,
+        step2: {
+          Comfort: null,
+          Looks: null,
+          Price: null,
+        },
+      };
     },
   },
 });
 
-export const { setEmail, setStatus, setStep, setResponse } = questionnaireSlice.actions;
+export const { setEmail, setStatus, setStep, setResponse, resetResponses } = questionnaireSlice.actions;
 
 export default questionnaireSlice.reducer;

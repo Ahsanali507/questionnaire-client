@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setResponse, setStatus } from '../redux/reducers/questionnaireReducer';
+import { resetResponses, setStatus } from '../redux/reducers/questionnaireReducer';
 import ArrowSvg from '../assets/images/arrow.svg'
 import ShoesSvg from '../assets/images/shows.svg'
 import ShadowSvg from '../assets/images/shadow.svg'
@@ -24,8 +24,7 @@ const ThankYouPage = () => {
         headers: { 'Content-Type': 'application/json' }
       });
       dispatch(setStatus('completed'));
-      dispatch(setResponse({ step: 'step1', response: null }))
-      dispatch(setResponse({ step: 'step2', response: null }))
+      dispatch(resetResponses());
     };
 
     toast.success("Thank you for completing you survey!");

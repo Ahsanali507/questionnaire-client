@@ -8,12 +8,13 @@ import Image from 'next/image'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import NikeOrangeShoe from '../assets/images/nikeOrangeShoe.svg'
 import NikeBlackShoe from '../assets/images/nikeBlackShoe.svg'
+import { RootState } from '../types/types'
 
 export default function QuestionPage1() {
   const dispatch = useDispatch()
   const router = useRouter()
-  const email = useSelector((state: any) => state.questionnaire.email)
-  const existingResponse = useSelector((state: any) => state.questionnaire.responses.step1)
+  const email = useSelector((state: RootState) => state.questionnaire.email)
+  const existingResponse = useSelector((state: RootState) => state.questionnaire.responses.step1)
   const [selectedOption, setSelectedOption] = useState<string>(existingResponse || '')
   const [showError, setShowError] = useState(false)
 

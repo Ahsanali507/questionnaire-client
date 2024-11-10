@@ -21,7 +21,8 @@ export default function QuestionPage2() {
   useEffect(() => {
     console.log("Email in QuestionPage2:", email)
     if (!email) {
-      router.push('/')
+      // router.push('/')
+      console.log("no email");
     }
   }, [email, router])
 

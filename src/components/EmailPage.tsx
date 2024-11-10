@@ -8,12 +8,14 @@ import { ArrowRight } from 'lucide-react'
 import ArrowSvg from '../assets/images/arrow.svg'
 import ShoesSvg from '../assets/images/shows.svg'
 import ShadowSvg from '../assets/images/shadow.svg'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/router';
 
 export default function EmailPage() {
   const [emailInput, setEmailInput] = useState('')
   const [showError, setShowError] = useState(false)
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const handleSubmit = async () => {
     try {
@@ -53,6 +55,7 @@ export default function EmailPage() {
       } else {
         window.location.href = '/question1'
       }
+      router.push('/question1')
     } catch (error) {
       console.error('Error checking status:', error)
     }
@@ -60,7 +63,7 @@ export default function EmailPage() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#4D4D4D] to-[#010101] email-main-container">
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-between px-4 email-left-container">
         <div className="relative flex w-1/2 items-center justify-center email-left-sub">
           <div className="relative h-[494px] w-[494px]">

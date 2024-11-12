@@ -21,7 +21,7 @@ export default function QuestionPage1() {
   useEffect(() => {
     console.log("Email in QuestionPage1:", email)
     if (!email) {
-      // router.push('/')
+      router.push('/')
       console.log("no email");
     }
   }, [email, router])
@@ -36,10 +36,11 @@ export default function QuestionPage1() {
     dispatch(setStep(2))
     
     try {
-      await fetch('/api/save-progress', {
+      await fetch('https://new-sample-express-app.vercel.app/api/save-progress', {
         method: 'POST',
         body: JSON.stringify({ email, step: 1, response: { answer: selectedOption } }),
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
       })
       router.push('/question2')
     } catch (error) {

@@ -21,10 +21,11 @@ export default function EmailPage() {
         setShowError(true)
         return
       }
-      const response = await fetch('/api/check-status', {
+      const response = await fetch('https://new-sample-express-app.vercel.app/api/check-status', {
         method: 'POST',
         body: JSON.stringify({ email: emailInput }),
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
       })
 
       const data = await response.json()

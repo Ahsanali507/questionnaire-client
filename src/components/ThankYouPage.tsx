@@ -8,7 +8,7 @@ import ShadowSvg from '../assets/images/shadow.svg'
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ThankYouPage = () => {
@@ -27,9 +27,9 @@ const ThankYouPage = () => {
       dispatch(resetResponses());
     };
     completeSurvey();
+    toast.success("Thank you for completing you survey!");
   }, [dispatch, email, responses]);
 
-  toast.success("Thank you for completing you survey!");
   const handleBack = () => {
     router.push('/question2')
   }

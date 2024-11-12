@@ -51,7 +51,7 @@ export default function QuestionPage1() {
     router.push('/')
   }
 
-  if (!email) return null
+  // if (!email) return null
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-gradient-to-br from-[#4D4D4D] to-[#010101] px-4 py-8">

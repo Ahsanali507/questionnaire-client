@@ -42,7 +42,7 @@ export default function QuestionPage2() {
     dispatch(setStep(3))
 
     try {
-      await fetch('https://new-sample-express-app.vercel.app/api/save-progress', {
+      await fetch('https://new-sample-expresss.vercel.app/api/save-progress', {
         method: 'POST',
         body: JSON.stringify({
           email,

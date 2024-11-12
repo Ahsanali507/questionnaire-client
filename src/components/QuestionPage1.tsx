@@ -36,7 +36,7 @@ export default function QuestionPage1() {
     dispatch(setStep(2))
     
     try {
-      await fetch('https://new-sample-expresss.vercel.app/api/save-progress', {
+      await fetch('https://new-express-sample-server.vercel.app/api/save-progress', {
         method: 'POST',
         body: JSON.stringify({ email, step: 1, response: { answer: selectedOption } }),
         headers: { 'Content-Type': 'application/json' },

@@ -18,7 +18,7 @@ const ThankYouPage = () => {
 
   useEffect(() => {
     const completeSurvey = async () => {
-      await fetch('https://new-sample-expresss.vercel.app/api/complete-survey', {
+      await fetch('https://new-express-sample-server.vercel.app/api/complete-survey', {
         method: 'POST',
         body: JSON.stringify({ email, finalData: responses }),
         headers: { 'Content-Type': 'application/json' },

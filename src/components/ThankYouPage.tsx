@@ -8,7 +8,7 @@ import ShadowSvg from '../assets/images/shadow.svg'
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ThankYouPage = () => {
@@ -29,7 +29,7 @@ const ThankYouPage = () => {
     };
     completeSurvey();
     toast.success("Thank you for completing you survey!");
-  }, [dispatch, email, responses]);
+  }, []);
 
   const handleBack = () => {
     router.push('/question2')
@@ -41,7 +41,7 @@ const ThankYouPage = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#4D4D4D] to-[#010101]">
-      {/* <ToastContainer/> */}
+      <ToastContainer/>
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-between px-4 thankyou-main">
         <div className="relative flex w-1/2 items-center justify-center thankyou-left">
           <div className="relative h-[494px] w-[494px]">

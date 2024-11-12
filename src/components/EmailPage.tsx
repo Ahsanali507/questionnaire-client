@@ -56,7 +56,6 @@ export default function EmailPage() {
       } else {
         window.location.href = '/question1'
       }
-      router.push('/question1')
     } catch (error) {
       console.error('Error checking status:', error)
     }

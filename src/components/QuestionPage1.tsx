@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setStep, setResponse } from '../redux/reducers/questionnaireReducer'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import NikeOrangeShoe from '../assets/images/nikeOrangeShoe.svg'
 import NikeBlackShoe from '../assets/images/nikeBlackShoe.svg'
 import { RootState } from '../types/types'
@@ -17,6 +17,7 @@ export default function QuestionPage1() {
   const existingResponse = useSelector((state: RootState) => state.questionnaire.responses.step1)
   const [selectedOption, setSelectedOption] = useState<string>(existingResponse || '')
   const [showError, setShowError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     console.log("Email in QuestionPage1:", email)
@@ -34,7 +35,8 @@ export default function QuestionPage1() {
 
     dispatch(setResponse({ step: 'step1', response: selectedOption }))
     dispatch(setStep(2))
-    
+    setIsLoading(true);
+
     try {
       await fetch('https://new-express-sample-server.vercel.app/api/save-progress', {
         method: 'POST',
@@ -45,6 +47,8 @@ export default function QuestionPage1() {
       router.push('/question2')
     } catch (error) {
       console.error('Error saving progress:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -68,15 +72,13 @@ export default function QuestionPage1() {
               setSelectedOption('Nike Orange')
               setShowError(false)
             }}
-            className={`group relative rounded-2xl bg-gray-600 p-6 transition-all hover:bg-gray-500 ${
-              selectedOption === 'Nike Orange' ? 'ring-2 ring-white' : ''
-            }`}
+            className={`group relative rounded-2xl bg-gray-600 p-6 transition-all hover:bg-gray-500 ${selectedOption === 'Nike Orange' ? 'ring-2 ring-white' : ''
+              }`}
           >
             <div className="absolute right-4 top-4 h-4 w-4 rounded-full border-2 border-white">
               <div
-                className={`h-2 w-2 translate-x-1/2 translate-y-1/2 rounded-full bg-white transition-all ${
-                  selectedOption === 'Nike Orange' ? 'scale-100' : 'scale-0'
-                }`}
+                className={`h-2 w-2 translate-x-1/2 translate-y-1/2 rounded-full bg-white transition-all ${selectedOption === 'Nike Orange' ? 'scale-100' : 'scale-0'
+                  }`}
               />
             </div>
             <div className="flex flex-col items-center">
@@ -96,15 +98,13 @@ export default function QuestionPage1() {
               setSelectedOption('Nike Black')
               setShowError(false)
             }}
-            className={`group relative rounded-2xl bg-gray-600 p-6 transition-all hover:bg-gray-500 ${
-              selectedOption === 'Nike Black' ? 'ring-2 ring-white' : ''
-            }`}
+            className={`group relative rounded-2xl bg-gray-600 p-6 transition-all hover:bg-gray-500 ${selectedOption === 'Nike Black' ? 'ring-2 ring-white' : ''
+              }`}
           >
             <div className="absolute right-4 top-4 h-4 w-4 rounded-full border-2 border-white">
               <div
-                className={`h-2 w-2 translate-x-1/2 translate-y-1/2 rounded-full bg-white transition-all ${
-                  selectedOption === 'Nike Black' ? 'scale-100' : 'scale-0'
-                }`}
+                className={`h-2 w-2 translate-x-1/2 translate-y-1/2 rounded-full bg-white transition-all ${selectedOption === 'Nike Black' ? 'scale-100' : 'scale-0'
+                  }`}
               />
             </div>
             <div className="flex flex-col items-center">
@@ -136,8 +136,17 @@ export default function QuestionPage1() {
             onClick={handleNext}
             className="flex items-center gap-2 rounded-full bg-[#c2f24b] px-6 py-3 font-semibold text-gray-900 transition-all hover:bg-[#b3e340]"
           >
-            Next
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            {isLoading ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" />
+                <span>Loading...</span>
+              </>
+            ) : (
+              <>
+                <span>Next</span>
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </>
+            )}
           </button>
         </div>
       </div>

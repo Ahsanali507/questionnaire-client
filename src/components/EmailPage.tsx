@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setEmail, setStatus } from '../redux/reducers/questionnaireReducer'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Loader2 } from 'lucide-react'
 import ArrowSvg from '../assets/images/arrow.svg'
 import ShoesSvg from '../assets/images/shows.svg'
 import ShadowSvg from '../assets/images/shadow.svg'
@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 export default function EmailPage() {
   const [emailInput, setEmailInput] = useState('')
   const [showError, setShowError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
 
   const handleSubmit = async () => {
@@ -21,6 +22,7 @@ export default function EmailPage() {
         setShowError(true)
         return
       }
+      setIsLoading(true)
       const response = await fetch('https://new-express-sample-server.vercel.app/api/check-status', {
         method: 'POST',
         body: JSON.stringify({ email: emailInput }),
@@ -56,6 +58,8 @@ export default function EmailPage() {
       }
     } catch (error) {
       console.error('Error checking status:', error)
+    }finally {
+      setIsLoading(false)
     }
   }
 
@@ -127,10 +131,20 @@ export default function EmailPage() {
 
             <button
               onClick={handleSubmit}
-              className="group flex w-full items-center justify-between rounded-full bg-[#c2f24b] px-6 py-3 text-lg font-semibold text-gray-900 transition-all hover:bg-[#b3e340]"
+              disabled={isLoading}
+              className="group flex w-full items-center justify-between rounded-full bg-[#c2f24b] px-6 py-3 text-lg font-semibold text-gray-900 transition-all hover:bg-[#b3e340] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Start Survey
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>
+                  <span>Start Survey</span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
             </button>
           </div>
         </div>

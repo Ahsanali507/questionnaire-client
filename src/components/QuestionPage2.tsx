@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setStep, setResponse } from '../redux/reducers/questionnaireReducer'
 import { useRouter } from 'next/router'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { RootState } from '../types/types'
 
 export default function QuestionPage2() {
@@ -17,6 +17,7 @@ export default function QuestionPage2() {
   const [looksScore, setLooksScore] = useState<number>(existingResponse?.Looks || 0)
   const [priceScore, setPriceScore] = useState<number>(existingResponse?.Price || 0)
   const [showErrors, setShowErrors] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     console.log("Email in QuestionPage2:", email)
@@ -40,6 +41,7 @@ export default function QuestionPage2() {
 
     dispatch(setResponse({ step: 'step2', response }))
     dispatch(setStep(3))
+    setIsLoading(true)
 
     try {
       await fetch('https://new-express-sample-server.vercel.app/api/save-progress', {
@@ -55,6 +57,8 @@ export default function QuestionPage2() {
       router.push('/thank-you')
     } catch (error) {
       console.error('Error saving progress:', error)
+    }finally{
+      setIsLoading(false)
     }
   }
 
@@ -121,8 +125,17 @@ export default function QuestionPage2() {
             onClick={handleNext}
             className="flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-gray-900 transition-all hover:bg-gray-100"
           >
-            Send
-            <ArrowRight className="h-5 w-5" />
+            {isLoading ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send</span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
           </button>
         </div>
       </div>

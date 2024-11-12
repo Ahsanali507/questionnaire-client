@@ -8,7 +8,7 @@ import ShadowSvg from '../assets/images/shadow.svg'
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ThankYouPage = () => {

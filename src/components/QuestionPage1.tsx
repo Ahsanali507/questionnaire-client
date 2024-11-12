@@ -55,7 +55,7 @@ export default function QuestionPage1() {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-gradient-to-br from-[#4D4D4D] to-[#010101] px-4 py-8">
-      <div className="w-full max-w-4xl px-[7rem]">
+      <div className="w-full max-w-4xl px-[5rem] main-container-ques1">
         <div className="mb-12 text-center">
           <h2 className="mb-2 text-xs uppercase tracking-wider text-gray-400">Question 1</h2>
           <h1 className="text-2xl font-bold text-white sm:text-4xl">What is your preferred choice?</h1>
